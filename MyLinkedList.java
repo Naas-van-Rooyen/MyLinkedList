@@ -204,6 +204,83 @@ public class MyLinkedList<E>  {
   }
 
 
+// Return last half of a list
+  public MyLinkedList getLastHalf()
+  {
+	  MyLinkedList returnList = new MyLinkedList();
+	  int counter = 1;
+	  int half;
+	  Node<E> ptr1 = head;
+	  Node<E> ptr2 = head;
+	  
+	  if(head == null) // Calling list is empty
+		  return returnList;
+	  
+	  while(ptr1.next != null)
+	  {
+		  counter++;
+		  ptr1 = ptr1.next;
+	  }
+	  
+	  half = counter/2;
+		
+	  for(int i = 0; i<half; i++)
+	  { 
+		 ptr2 = ptr2.next;
+	  }
+	  
+	  for(int i = half; half<counter; i++)
+	  {
+		  if(ptr2 == null)
+			  return returnList;
+		  else
+			  returnList.append(ptr2.element);
+			ptr2 = ptr2.next;
+	  }
+	  
+	  return returnList;
+  }
+
+
+public int deDuplicate()
+{
+	int itm_rem = 0;
+	Node<E> ptr10 = head;
+	Node<E> ptr20;
+	int failsafe = 0;
+	
+	if(head == null)
+	{
+		return 0;
+	}
+	
+	while(ptr10 != tail.next)
+	{
+		ptr20 = head;
+		
+		while(ptr20 != tail.next)
+		{
+			if(ptr10 == ptr20)
+			{
+				ptr20 = ptr20.next;
+			}
+			else
+			{
+				if(((Comparable)ptr10.element).compareTo(ptr20.element)==0)
+				{
+					this.delete(ptr20.element);
+					itm_rem++;
+				}
+				ptr20 = ptr20.next;
+			}
+		}
+		
+		ptr10 = ptr10.next;
+	}
+	return itm_rem;
+}
+
+
   private static class Node<E> {
     E element;
     Node<E> next;
